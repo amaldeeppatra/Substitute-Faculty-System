@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIIT Substitute Management System</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    .container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .left-side {
+      width: 13%;
+      background-color: #11c878;
+      color: white;
+      padding: 20px;
+    }
+
+    .left-side p {
+      margin-bottom: 33px;
+    }
+
+    .left-side ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .left-side li {
+      margin-bottom: 17px;
+    }
+
+    .left-side a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .left-side button {
+      background-color: transparent;
+      color: red;
+      border: none;
+      cursor: pointer;
+      margin-top: 300px;
+      font-size: 19px;
+    }
+
+    .right-side {
+      width: 78%;
+      background-color: white;
+      padding: 20px;
+    }
+
+    .right-side h1,
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .right-side .request {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .right-side label {
+      margin-right: 10px;
+    }
+
+    .right-side input[type="date"] {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .right-side button {
+      background-color: #11c878;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      height: 44px;
+    }
+
+    .class-schedule-container {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .table-container {
+      width: 100%;
+    }
+
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-container table th,
+    td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .table-container table thead th {
+      background-color: #f2f2f2;
+    }
+
+    .remove-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-side">
+      <p>Username</p>
+      <ul>
+        <li><a href="#">Create Request</a></li>
+        <li><a href="#">Previous Request</a></li>
+        <li><a href="#">Accepted Request</a></li>
+        <li><a href="#">Time Table</a></li>
+      </ul>
+      <button id="sign-out">Sign Out</button>
+    </div>
+    <div class="right-side">
+      <h1>KIIT Substitute Management</h1>
+      <h2>Create Substitute Request</h2>
+      <label for="start-date">Start date of leave:</label>
+      <input type="date" id="start-date">
+      <label for="last-date">Last date of leave:</label>
+      <input type="date" id="last-date">
+      <div class="class-schedule-container">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Classes</th>
+              </tr>
+            </thead>
+            <tbody id="schedule-table-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <button id="submit-request">Submit</button>
+      <p id="submission-message" style="display: none;">Your substitute request has been submitted</p>
+    </div>
+  </div>
+  <script>
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('last-date');
+    const tableBody = document.getElementById('schedule-table-body');
+    const submitButton = document.getElementById('submit-request');
+    const submissionMessage = document.getElementById('submission-message');
+
+    function disablePastDates(startDate) {
+      endDateInput.min = startDate;
+    }
+
+    function addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    function generateTableRows(startDate, endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays > 5) {
+        alert('The difference between start and end date should not be more than 5 days.');
+        return;
+      }
+
+      tableBody.innerHTML = '';
+      for (let i = 0; i <= diffDays; i++) {
+        const currentDate = addDays(start, i);
+        const day = currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${day}</td>
+          <td>
+            <div class="class-container">
+              <input type="time" name="time">
+              <input type="text" placeholder="Subject" name="subject">
+              <input type="text" placeholder="Section" name="section">
+              <input type="text" placeholder="Room" name="room">
+              <button class="remove-btn">Remove</button>
+            </div>
+            <button class="add-class-btn">Add Class</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      }
+    }
+
+    function gatherFormData() {
+      const startDate = startDateInput.value;
+      const endDate = endDateInput.value;
+      const schedule = [];
+
+      const rows = tableBody.querySelectorAll('tr');
+      rows.forEach(row => {
+        const day = row.querySelector('td').textContent;
+        const classes = row.querySelectorAll('.class-container');
+        classes.forEach(classContainer => {
+          const time = classContainer.querySelector('input[name="time"]').value;
+          const subject = classContainer.querySelector('input[name="subject"]').value;
+          const section = classContainer.querySelector('input[name="section"]').value;
+          const room = classContainer.querySelector('input[name="room"]').value;
+
+          schedule.push({ day, time, subject, section, room });
+        });
+      });
+
+      return { startDate, endDate, schedule };
+    }
+
+    function validateForm() {
+      const startDate = startDateInput.value;
+      const endDate = endDateInput.value;
+      const scheduleRows = tableBody.querySelectorAll('tr');
+      let isValid = true;
+  
+      if (!startDate || !endDate) {
+        alert('Please select start and end dates.');
+        isValid = false;
+      }
+  
+      scheduleRows.forEach(row => {
+        const timeInput = row.querySelector('input[name="time"]');
+        const subjectInput = row.querySelector('input[name="subject"]');
+        const sectionInput = row.querySelector('input[name="section"]');
+        const roomInput = row.querySelector('input[name="room"]');
+  
+        if (!timeInput.value || !subjectInput.value || !sectionInput.value || !roomInput.value) {
+          alert('Please fill out all fields in the schedule.');
+          isValid = false;
+        }
+      });
+  
+      return isValid;
+    }
+
+    function submitFormData() {
+      if (!validateForm()) {
+        return;
+      }
+
+      const formData = gatherFormData();
+      console.log('Form Data:', formData);
+
+      fetch('/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(errorData => {
+            throw new Error(errorData.message || 'An error occurred');
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          submissionMessage.style.display = 'block';
+          resetForm();
+        } else {
+          alert('There was an error submitting your request.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert(`There was an error submitting your request: ${error.message}`);
+      });
+    }
+
+    function resetForm() {
+      startDateInput.value = '';
+      endDateInput.value = '';
+      tableBody.innerHTML = '';
+      submissionMessage.style.display = 'none';
+    }
+
+    startDateInput.addEventListener('change', function() {
+      const selectedStartDate = this.value;
+      disablePastDates(selectedStartDate);
+    });
+
+    endDateInput.addEventListener('change', function() {
+      const startDate = startDateInput.value;
+      const endDate = this.value;
+      if (startDate) {
+        generateTableRows(startDate, endDate);
+      }
+    });
+
+    tableBody.addEventListener('click', function(event) {
+      if (event.target.classList.contains('remove-btn')) {
+        const classContainer = event.target.parentNode;
+        classContainer.remove();
+      } else if (event.target.classList.contains('add-class-btn')) {
+        const row = event.target.parentNode;
+        const newClassContainer = document.createElement('div');
+        newClassContainer.classList.add('class-container');
+        newClassContainer.innerHTML = `
+          <input type="time" name="time">
+          <input type="text" placeholder="Subject" name="subject">
+          <input type="text" placeholder="Section" name="section">
+          <input type="text" placeholder="Room" name="room">
+          <button class="remove-btn">Remove</button>
+        `;
+        row.insertBefore(newClassContainer, event.target);
+      }
+    });
+
+    submitButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      submitFormData();
+    });
+  </script>
+  
+</body>
+</html>
