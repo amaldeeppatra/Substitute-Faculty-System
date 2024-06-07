@@ -127,7 +127,26 @@
     .remove-btn:hover {
       background-color: #d32f2f;
     }
+    /* Style the time picker input */
+.right-side input[type="time"] {
+  padding: 8px 12px; /* Adjust padding for better appearance */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 3px; /* Add border radius */
+  background-color: #f2f2f2; /* Set background color */
+  color: #333; /* Set text color */
+  font-size: 14px; /* Adjust font size */
+}
+
+/* Style the time picker input on focus */
+.right-side input[type="time"]:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #11c878; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(17, 200, 120, 0.5); /* Add box shadow on focus */
+}
+
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
   <div class="container">
@@ -166,6 +185,7 @@
       <p id="submission-message" style="display: none;">Your substitute request has been submitted</p>
     </div>
   </div>
+
   <script>
     const startDateInput = document.getElementById('start-date');
     const endDateInput = document.getElementById('last-date');
@@ -189,7 +209,7 @@
       const diffTime = Math.abs(end - start);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-      if (diffDays > 5) {
+      if (diffDays > 4) {
         alert('The difference between start and end date should not be more than 5 days.');
         return;
       }
@@ -204,7 +224,7 @@
           <td>${day}</td>
           <td>
             <div class="class-container">
-              <input type="time" name="time">
+              <input type="time" name="time" id="timeInput">
               <input type="text" placeholder="Subject" name="subject">
               <input type="text" placeholder="Section" name="section">
               <input type="text" placeholder="Room" name="room">
@@ -331,7 +351,7 @@
         const newClassContainer = document.createElement('div');
         newClassContainer.classList.add('class-container');
         newClassContainer.innerHTML = `
-          <input type="time" name="time">
+          <input type="time" name="time" id="timeInput">
           <input type="text" placeholder="Subject" name="subject">
           <input type="text" placeholder="Section" name="section">
           <input type="text" placeholder="Room" name="room">
@@ -346,6 +366,16 @@
       submitFormData();
     });
   </script>
-  
+
+  <script>
+    // Initialize Flatpickr
+    flatpickr("#start-date, #last-date", {
+      // dateFormat: "Y-m-d", // Date format
+      enableTime: false, // Disable time selection
+      minDate: "today", // Minimum selectable date (default: no minimum date)
+      
+    });
+  </script>
+
 </body>
 </html>
