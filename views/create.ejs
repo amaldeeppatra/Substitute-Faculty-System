@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KIIT Substitute Management System</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      font-style: normal;
     }
 
     .container {
@@ -128,21 +131,40 @@
       background-color: #d32f2f;
     }
     /* Style the time picker input */
-.right-side input[type="time"] {
-  padding: 8px 12px; /* Adjust padding for better appearance */
-  border: 1px solid #ccc; /* Add border */
-  border-radius: 3px; /* Add border radius */
-  background-color: #f2f2f2; /* Set background color */
-  color: #333; /* Set text color */
-  font-size: 14px; /* Adjust font size */
-}
+    .right-side input[type="time"] {
+      padding: 8px 12px; /* Adjust padding for better appearance */
+      border: 1px solid #ccc; /* Add border */
+      border-radius: 3px; /* Add border radius */
+      background-color: #f2f2f2; /* Set background color */
+      color: #333; /* Set text color */
+      font-size: 14px; /* Adjust font size */
+    }
 
-/* Style the time picker input on focus */
-.right-side input[type="time"]:focus {
-  outline: none; /* Remove default focus outline */
-  border-color: #11c878; /* Change border color on focus */
-  box-shadow: 0 0 5px rgba(17, 200, 120, 0.5); /* Add box shadow on focus */
-}
+    /* Style the time picker input on focus */
+    .right-side input[type="time"]:focus {
+      outline: none; /* Remove default focus outline */
+      border-color: #11c878; /* Change border color on focus */
+      box-shadow: 0 0 5px rgba(17, 200, 120, 0.5); /* Add box shadow on focus */
+    }
+
+    #submit-request{
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 1rem;
+    }
+    .add-class-btn{
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 0.9rem;
+    }
+    .remove-btn{
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 0.9rem;
+    }
 
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -182,7 +204,7 @@
         </div>
       </div>
       <button id="submit-request">Submit</button>
-      <p id="submission-message" style="display: none;">Your substitute request has been submitted</p>
+      <p id="submission-message" style='display: none; font-family: "Poppins", sans-serif;font-weight: 400;font-style: normal;'>Your substitute request has been submitted</p>
     </div>
   </div>
 
@@ -373,7 +395,6 @@
       // dateFormat: "Y-m-d", // Date format
       enableTime: false, // Disable time selection
       minDate: "today", // Minimum selectable date (default: no minimum date)
-      
     });
   </script>
 
