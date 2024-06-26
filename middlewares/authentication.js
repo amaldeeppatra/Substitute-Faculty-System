@@ -17,6 +17,14 @@ function checkForAuthenticationCookie(cookieName){
     }
 }
 
+function ensureAuthenticated(req, res, next) {
+    if (req.user) {
+        return next();
+    }
+    res.redirect('/');
+}
+
 module.exports = {
     checkForAuthenticationCookie,
+    ensureAuthenticated
 };

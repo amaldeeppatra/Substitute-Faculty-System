@@ -1,12 +1,13 @@
 const {Router} = require("express");
 const { createRequest } = require("../controllers/create");
+const { ensureAuthenticated } = require("../middlewares/authentication");
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", ensureAuthenticated, (req, res) => {
     res.render("create")
 })
 
-router.post("/", createRequest);
+router.post("/", ensureAuthenticated, createRequest);
 
 
 module.exports = router;

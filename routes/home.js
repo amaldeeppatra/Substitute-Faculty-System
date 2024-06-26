@@ -1,7 +1,8 @@
 const {Router} = require("express");
 const router = Router();
+const { ensureAuthenticated } = require('../middlewares/authentication');
 
-router.get("/", (req, res) => {
+router.get("/", ensureAuthenticated, (req, res) => {
     res.render("home")
 })
 
