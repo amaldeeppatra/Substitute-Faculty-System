@@ -24,6 +24,10 @@ const requestSchema = new Schema({
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: "user"
+    },
+    isAccepted: {
+        type: Boolean,
+        default: false
     }
 }, {timestamps: true});
 

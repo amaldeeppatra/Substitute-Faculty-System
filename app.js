@@ -12,6 +12,8 @@ const userRoute = require("./routes/user")
 const homeRoute = require("./routes/home")
 const createRoute = require("./routes/create")
 const prevRoute = require("./routes/previous")
+const acceptedRoute = require("./routes/accepted")
+const requestRoute = require("./routes/request")
 
 mongoose.connect("mongodb+srv://admin:2joV202nwh01DHGo@myprojects.hewgpoj.mongodb.net/substitute-faculty-system?retryWrites=true&w=majority&appName=MyProjects").then((e) => console.log("Mongodb connected"))
 
@@ -32,5 +34,7 @@ app.use("/user", userRoute);
 app.use("/home", homeRoute);
 app.use("/create", createRoute);
 app.use("/previous", prevRoute);
+app.use("/accepted", acceptedRoute);
+app.use("/request", requestRoute);
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));
