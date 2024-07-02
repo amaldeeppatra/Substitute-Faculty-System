@@ -6,7 +6,12 @@ function createTokenForUser(user){
         _id: user._id,
         email: user.email,
     };
-    const token = JWT.sign(payload, secret);
+    const options = {
+        expiresIn: '7h' // Token expires in 7 hours
+    };
+    const token = JWT.sign(payload, secret, options);
+
+    // const token = JWT.sign(payload, secret);
     return token;
 }
 

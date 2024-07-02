@@ -82,7 +82,7 @@
     }
 
     .sign-out:hover {
-        background-color: #f1f1f1;
+        background-color: #e0e0e0;
         color: #0fa567;
     }
 
@@ -133,7 +133,6 @@
         background-color: #f9f9f9;
         color: #333;
     }
-
   </style>
 </head>
 <body>
@@ -141,42 +140,41 @@
     <div class="sidebar">
       <div class="profile">
         <div class="avatar"></div>
-        <p>Username</p>
+        <p><%= user %></p>
       </div>
       <nav class="nav-menu">
         <ul>
+          <li><a href="/home">Home</a></li>
           <li><a href="/create">Create Request</a></li>
           <li><a href="/previous">Previous Request</a></li>
           <li class="active"><a href="/accepted">Accepted Request</a></li>
           <li><a href="#">Time Table</a></li>
         </ul>
       </nav>
-      <button class="sign-out">Sign Out</button>
+      <form action="/logout" method="POST">
+        <button class="sign-out">Sign Out</button>
+      </form>
     </div>
     <div class="main-content">
       <header>
-        <h1>KIIT Substitute Management</h1>
+        <h1>KIIT Substitute Management System</h1>
       </header>
       <section class="accepted-requests">
         <h2>Accepted Substitute Request</h2>
-        <div class="request-item">
-          <h3>Monday, March 4</h3>
-          <div class="request-details">
-            <input type="text" value="09:00:00" readonly>
-            <input type="text" value="Operating System" readonly>
-            <input type="text" value="CSE-3" readonly>
-            <input type="text" value="C-LH-403" readonly>
-          </div>
-        </div>
-        <div class="request-item">
-          <h3>Tuesday, March 5</h3>
-          <div class="request-details">
-            <input type="text" value="09:00:00" readonly>
-            <input type="text" value="Operating System" readonly>
-            <input type="text" value="CSE-3" readonly>
-            <input type="text" value="C-LH-403" readonly>
-          </div>
-        </div>
+        <% if (requests.length > 0) { %>
+          <% requests.forEach(request => { %>
+            <div class="request-item">
+              <h3><%= new Date(request.createdAt).toDateString() %></h3>
+              <div class="request-details">
+                <input type="text" value="<%= request.time %>" readonly>
+                <input type="text" value="<%= request.subject %>" readonly>
+                <input type="text" value="<%= request.section %>" readonly>
+                <input type="text" value="<%= request.room %>" readonly>
+              </div>
+            </div>
+        <% })} else { %>
+          <p>No requests found.</p>
+        <% } %>
       </section>
     </div>
   </div>

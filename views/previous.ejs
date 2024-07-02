@@ -1,343 +1,182 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIIT Substitute Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        .sidebar {
-            background-color: #11c878;
-            color: white;
-            width: 14%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: -100px;
-        }
-
-        .profile {
-            text-align: center;
-        }
-
-        .avatar {
-            width: 80px;
-            height: 80px;
-            background-color: #ccc;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .nav-menu {
-            width: 100%;
-            flex-grow: 1;
-        }
-
-        .nav-menu ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .nav-menu li {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        .nav-menu li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-menu li.active a {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .sign-out {
-            background-color: white;
-            color: #11c878;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-right: 12px;
-        }
-
-        .sign-out:hover {
-            background-color: #f1f1f1;
-            color: #0fa567;
-        }
-
-        .main-content {
-            flex-grow: 1;
-            background-color: #f9f9f9;
-            padding: 40px;
-        }
-
-        header h1 {
-            color: #2cc587;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .previous-requests {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .previous-requests h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .request-item {
-            margin-bottom: 20px;
-        }
-
-        .request-item h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .request-details {
-            display: flex;
-            gap: 10px;
-        }
-
-        .request-details input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            flex: 1;
-        }
-
-    </style>
-</head>
-<body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="profile">
-                <div class="avatar"></div>
-                <p>Username</p>
-            </div>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="/create">Create Request</a></li>
-                    <li class="active"><a href="/previous">Previous Request</a></li>
-                    <li><a href="#">Accepted Request</a></li>
-                    <li><a href="#">Time Table</a></li>
-                </ul>
-            </nav>
-            <button class="sign-out">Sign Out</button>
-        </aside>
-        <main class="main-content">
-            <header>
-                <h1>KIIT Substitute Management</h1>
-            </header>
-            <section class="previous-requests">
-                <h2>Previous Substitute Request</h2>
-                
-
-            </section>
-        </main>
-    </div>
-</body>
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIIT Substitute Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIIT Substitute Management System</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        height: 100vh;
+    }
 
-        .container {
-            display: flex;
-            width: 100%;
-        }
+    .container {
+        display: flex;
+        width: 100%;
+    }
 
-        .sidebar {
-            background-color: #11c878;
-            color: white;
-            width: 14%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: -100px;
-        }
+    .sidebar {
+        background-color: #11c878;
+        color: white;
+        width: 14%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        .profile {
-            text-align: center;
-        }
+    .profile {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .avatar {
-            width: 80px;
-            height: 80px;
-            background-color: #ccc;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
+    .avatar {
+        width: 80px;
+        height: 80px;
+        background-color: #ccc;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
 
-        .nav-menu {
-            width: 100%;
-            flex-grow: 1;
-        }
+    .nav-menu {
+        width: 100%;
+        flex-grow: 1;
+    }
 
-        .nav-menu ul {
-            list-style: none;
-            padding: 0;
-        }
+    .nav-menu ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+    }
 
-        .nav-menu li {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    .nav-menu li {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 
-        .nav-menu li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
+    .nav-menu li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+    }
 
-        .nav-menu li.active a {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 8px;
-        }
+    .nav-menu li.active a {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
 
-        .sign-out {
-            background-color: white;
-            color: #11c878;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-right: 12px;
-        }
+    .sign-out {
+        background-color: white;
+        color: #11c878;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-        .sign-out:hover {
-            background-color: #f1f1f1;
-            color: #0fa567;
-        }
+    .sign-out:hover {
+        background-color: #e0e0e0;
+        color: #0fa567;
+    }
 
-        .main-content {
-            flex-grow: 1;
-            background-color: #f9f9f9;
-            padding: 40px;
-        }
+    .main-content {
+        flex-grow: 1;
+        background-color: #f9f9f9;
+        padding: 40px;
+    }
 
-        header h1 {
-            color: #2cc587;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+    header h1 {
+        color: #2cc587;
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-        .previous-requests {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .accepted-requests {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .previous-requests h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
+    .accepted-requests h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
 
-        .request-item {
-            margin-bottom: 20px;
-        }
+    .request-item {
+        margin-bottom: 20px;
+    }
 
-        .request-item h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+    .request-item h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
 
-        .request-details {
-            display: flex;
-            gap: 10px;
-        }
+    .request-details {
+        display: flex;
+        gap: 10px;
+    }
 
-        .request-details input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            flex: 1;
-        }
-
-    </style>
+    .request-details input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        flex: 1;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="profile">
-                <div class="avatar"></div>
-                <p><%= user.fullName %></p>
-            </div>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="/create">Create Request</a></li>
-                    <li class="active"><a href="/previous">Previous Request</a></li>
-                    <li><a href="/accepted">Accepted Request</a></li>
-                    <li><a href="#">Time Table</a></li>
-                </ul>
-            </nav>
-            <button class="sign-out">Sign Out</button>
-        </aside>
-        <main class="main-content">
-            <header>
-                <h1>KIIT Substitute Management</h1>
-            </header>
-            <section class="previous-requests">
-                <h2>Previous Substitute Request</h2>
-                <% if (requests.length > 0) { %>
-                    <% requests.forEach(request => { %>
-                        <div class="request-item">
-                            <h3><%= request.subject %> - <%= request.section %></h3>
-                            <div class="request-details">
-                                <p>Day: <%= request.day %></p>
-                                <p>Time: <%= request.time %></p>
-                                <p>Room: <%= request.room %></p>
-                            </div>
-                        </div>
-                    <% }) %>
-                <% } else { %>
-                    <p>No previous requests found.</p>
-                <% } %>
-            </section>
-        </main>
+  <div class="container">
+    <div class="sidebar">
+      <div class="profile">
+        <div class="avatar"></div>
+        <p><%= user %></p>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/create">Create Request</a></li>
+          <li class="active"><a href="/previous">Previous Request</a></li>
+          <li><a href="/accepted">Accepted Request</a></li>
+          <li><a href="#">Time Table</a></li>
+        </ul>
+      </nav>
+      <form action="/logout" method="POST">
+        <button class="sign-out">Sign Out</button>
+      </form>
     </div>
+    <div class="main-content">
+      <header>
+        <h1>KIIT Substitute Management System</h1>
+      </header>
+      <section class="accepted-requests">
+        <h2>Previous Substitute Request</h2>
+        <% if (requests.length > 0) { %>
+          <% requests.forEach(request => { %>
+            <div class="request-item">
+              <h3><%= new Date(request.createdAt).toDateString() %></h3>
+              <div class="request-details">
+                <input type="text" value="<%= request.time %>" readonly>
+                <input type="text" value="<%= request.subject %>" readonly>
+                <input type="text" value="<%= request.section %>" readonly>
+                <input type="text" value="<%= request.room %>" readonly>
+              </div>
+            </div>
+        <% })} else { %>
+          <p>No previous requests found.</p>
+        <% } %>
+      </section>
+    </div>
+  </div>
 </body>
 </html>

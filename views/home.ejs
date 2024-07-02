@@ -5,152 +5,197 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KIIT Substitute Management System</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
     body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        height: 100vh;
     }
 
     .container {
-      display: flex;
-      width: 100vw;
-      height: 100vh;
+        display: flex;
+        width: 100%;
     }
 
-    .left-side {
-      width: 20%;
-      background-color: #11c878;
-      color: white;
-      padding: 20px;
-      box-sizing: border-box;
+    .sidebar {
+        background-color: #11c878;
+        color: white;
+        width: 14%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .left-side p {
-      margin-bottom: 20px;
+    .profile {
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    .left-side ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .avatar {
+        width: 80px;
+        height: 80px;
+        background-color: #ccc;
+        border-radius: 50%;
+        margin-bottom: 10px;
     }
 
-    .left-side li {
-      margin-bottom: 20px;
+    .nav-menu {
+        width: 100%;
+        flex-grow: 1;
     }
 
-    .left-side a {
-      text-decoration: none;
-      color: white;
+    .nav-menu ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
     }
 
-    .left-side a:hover {
-      text-shadow: 0px 0px 10px rgba(69,69,69,1);
+    .nav-menu li {
+        width: 100%;
+        margin-bottom: 20px;
     }
 
-    .left-side button {
-      background-color: transparent;
-      color: red;
-      border: none;
-      cursor: pointer;
-      margin-top: 300px;
-      font-size: 19px;
+    .nav-menu li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
     }
 
-    .right-side {
-      width: 80%;
-      background-color: white;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
+    .nav-menu li.active a {
+        background-color: rgba(255, 255, 255, 0.2);
     }
 
-    .right-side h1 {
-      text-align: center;
+    .sign-out {
+        background-color: white;
+        color: #11c878;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
     }
 
-    .right-side h2 {
-      margin-bottom: 10px;
+    .sign-out:hover {
+        background-color: #e0e0e0;
+        color: #0fa567;
+    }
+
+    .main-content {
+        flex-grow: 1;
+        background-color: #f9f9f9;
+        padding: 40px;
+    }
+
+    header h1 {
+        color: #2cc587;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .recent-requests {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .recent-requests h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 
     .request-item {
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
     }
 
     .request-item h3 {
-      margin: 0;
-      font-size: 18px;
+        font-size: 18px;
+        margin-bottom: 10px;
     }
 
     .request-details {
-      display: flex;
-      justify-content: space-between;
-      font-size: 16px;
-      margin-top: 10px;
-      align-items: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .request-details p {
-      margin: 0;
+        margin: 0;
+        font-size: 16px;
     }
 
-    .request-list {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding-right: 10px;
-      box-sizing: border-box;
+    .viewButton {
+        background-color: #11c878;
+        border: none;
+        border-radius: 8px;
+        padding: 7px 10px;
+        font-size: 15px;
+        cursor: pointer;
+        color: white;
     }
 
-    .viewButton{
-      background-color: #11c878;
-      border: none;
-      border-radius: 8px;
-      padding: 7px 10px 7px 10px;
-      font-size: 15px;
-      cursor: pointer;
+    .viewButton:hover {
+        background-color: #0eb46c;
     }
-    .viewButton:hover{
-      background-color: #0eb46c;
-    }
-
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="left-side">
-      <p>Username</p>
-      <ul>
-        <li><a href="/create">Create Request</a></li>
-        <li><a href="/previous">Previous Request</a></li>
-        <li><a href="/accepted">Accepted Request</a></li>
-        <li><a href="#">Time Table</a></li>
-      </ul>
-      <button id="sign-out">Sign Out</button>
-    </div>
-    <div class="right-side">
-      <h1>Welcome Teacher to KIIT Substitute Management System</h1>
-      <h2>Recent Requests</h2>
-      <div class="request-list">
-        <% if (requests.length > 0) { %>
-          <% requests.forEach(request => { %>
-            <div class="request-item">
-              <h3><%= request.subject %> - <%= request.section %></h3>
-              <div class="request-details">
-                <p>Day: <%= request.day %></p>
-                <p>Time: <%= request.time %></p>
-                <p>Room: <%= request.room %></p>
-                <button class="viewButton" onclick="window.location.href = '/request/<%= request._id %>'">View</button>
-              </div>
-            </div>
-          <% }) %>
-        <% } else { %>
-          <p>No recent requests found.</p>
-        <% } %>
+    <div class="sidebar">
+      <div class="profile">
+        <div class="avatar"></div>
+        <p><%= user %></p>
       </div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="active"><a href="/home">Home</a></li>
+          <li><a href="/create">Create Request</a></li>
+          <li><a href="/previous">Previous Request</a></li>
+          <li><a href="/accepted">Accepted Request</a></li>
+          <li><a href="#">Time Table</a></li>
+        </ul>
+      </nav>
+      <form action="/logout" method="POST">
+        <button class="sign-out">Sign Out</button>
+      </form>
+    </div>
+    <div class="main-content">
+      <header>
+        <h1>Welcome <%= user %> to KIIT Substitute Management System</h1>
+      </header>
+      <section class="recent-requests">
+        <h2>Recent Requests</h2>
+        <div class="request-list">
+          <% if (requests.length > 0) { %>
+            <% requests.forEach(request => { %>
+              <div class="request-item">
+                <h3><%= request.subject %> - <%= request.section %></h3>
+                <div class="request-details">
+                  <p>Day: <%= request.day %></p>
+                  <p>Time: <%= request.time %></p>
+                  <p>Room: <%= request.room %></p>
+                  <button class="viewButton" onclick="window.location.href = '/request/<%= request._id %>'">View</button>
+                </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>No recent requests found.</p>
+          <% } %>
+        </div>
+      </section>
     </div>
   </div>
 </body>

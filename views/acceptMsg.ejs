@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Accepted</title>
+    <style>
+        button{
+            background-color: #11c878;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 10px;
+            font-size: 15px;
+            cursor: pointer;
+            color: white;
+        }
+        button:hover {
+            background-color: #0eb46c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Request <%= requestId %> accepted!</h1>
+    <button onclick="window.location.href='/home'">Go back to Home</button>
+</body>
+</html>

@@ -30,7 +30,8 @@ router.post("/:id/accept", ensureAuthenticated, async(req, res) => {
     request.isAccepted = true;
     await request.save();
 
-    res.send(`Request ${requestId} accepted!`);
+    // res.send(`Request ${requestId} accepted!`);
+    res.render("acceptMsg", { requestId: requestId });
 })
 
 module.exports = router;
