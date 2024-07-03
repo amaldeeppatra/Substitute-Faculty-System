@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require('body-parser');
-const PORT = 5000;
+require('dotenv').config();
+const PORT = process.env.PORT;
 
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -16,7 +17,7 @@ const acceptedRoute = require("./routes/accepted")
 const requestRoute = require("./routes/request")
 const logoutRoute = require("./routes/logout")
 
-mongoose.connect("mongodb+srv://admin:2joV202nwh01DHGo@myprojects.hewgpoj.mongodb.net/substitute-faculty-system?retryWrites=true&w=majority&appName=MyProjects").then((e) => console.log("Mongodb connected"))
+mongoose.connect(process.env.mongodbURL).then((e) => console.log("Mongodb connected"))
 
 app.use(bodyParser.json());
 app.use(express.json());

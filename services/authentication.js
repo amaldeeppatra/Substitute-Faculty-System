@@ -1,5 +1,6 @@
 const JWT = require("jsonwebtoken");
-const secret = "AP@p911@123";
+require('dotenv').config();
+const secret = process.env.jwtsecretkey;
 
 function createTokenForUser(user){
     const payload = {
