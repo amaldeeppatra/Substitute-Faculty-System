@@ -41,5 +41,3 @@ app.use("/request", requestRoute);
 app.use("/logout", logoutRoute);
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));
-
-//module.exports = app;
