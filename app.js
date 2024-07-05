@@ -40,4 +40,6 @@ app.use("/accepted", acceptedRoute);
 app.use("/request", requestRoute);
 app.use("/logout", logoutRoute);
 
-app.listen(PORT, () => console.log(`Server running at ${PORT}`));
+//app.listen(PORT, () => console.log(`Server running at ${PORT}`));
+
+module.exports = app;
